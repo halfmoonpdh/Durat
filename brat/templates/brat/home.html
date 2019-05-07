@@ -1,0 +1,43 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% if admin %}
+        <a href="{% url 'brat:admin_all_document' %}">
+        <div class="aside_data_list_text lobster_font">All Document</div></a>
+        <a href="{% url 'brat:admin_month_rate' %}">
+        <div class="aside_data_list_text lobster_font">Month rate</div></a>
+    {% else %}
+        {% for tag_list in taging_list %}
+            <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+            <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block article_data_list %}
+    <p class="article_data_list">< - 리스트 선택</p>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    <p><a href="/home/listcreate/" style="color: #ff9400;">리스트 추가</a></p>
+    {% if admin %}
+        <p><a href="{% url 'brat:admin_derestrict' %}">관리자 모드 해제</a></p>
+    {% else %}
+        <p><a href="{% url 'brat:admin' %}">관리자 모드</a></p>
+    {% endif %}
+{% endblock %}

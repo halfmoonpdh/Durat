@@ -1,0 +1,29 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+{% endblock %}
+
+{% block article_data_list %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="listname">제목:
+        <input id="listname" type="text" maxlength="20" name="listname"></label>
+        <input type="submit" value="확인">
+    </form>
+    <p>(영어만 가능)</p>
+{% endblock %}

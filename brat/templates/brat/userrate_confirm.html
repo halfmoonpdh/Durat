@@ -1,0 +1,22 @@
+{% block article_data_list %}
+    {% if message %}
+        <p>{{ message }}</p>
+    {% else %}
+        <p>정말로 통계정보를 수정 하시겠습니까?</p>
+    {% endif %}
+
+    <div>
+        <form action="" method="post" style="float:left;">
+            {% csrf_token %}
+            <input type="hidden" name="yesno" value="yes">
+            <input type="submit" value="확인">
+        </form>
+    </div>
+    <div>
+        <form action="" method="post" style="margin-left:20px;">
+            {% csrf_token %}
+            <input type="hidden" name="yesno" value="no">
+            <input type="submit" value="취소">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,101 @@
+#header_bar {
+    width: 98.4%;
+    background-color: #ff9400;
+    padding: 60px 0px 10px 20px;
+}
+
+a { text-decoration:none }
+
+/*lobster font*/
+.lobster_font {
+    font-family: 'Lobster', cursive;
+    text-decoration-line: none;
+    color: white;
+}
+
+.lobster_font_for_korean {
+    font-family: 'Stylish', sans-serif;
+    text-decoration-line: none;
+    color: white;
+}
+
+.header_title_durat{
+    font-size:60px;
+}
+
+.no_margin_padding{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+#header_is_login {
+    color: #ffffff;
+    float: right;
+    font-size: 15pt;
+    padding: 0px 0px 0px 0px;
+    margin-right: 17px;
+}
+
+#aside_data_list {
+    float: left;
+    width: 15%;
+    margin: 50px 0px 0px 4%;
+    padding: 0px 0px 0px 0px;
+    background-color: #ff9400;
+}
+
+.aside_data_list_text {
+    color: white;
+    padding: 0px 20px 0px 0px;
+    text-align: right;
+    border-bottom: solid 3px white;
+    border-bottom-color: white;
+    font-size: 25px;
+}
+
+#article_data_list_taging_list_title{
+    font-size: 45px;
+    color: #ff9400;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 30px 5px;
+}
+
+#article_data_list {
+    width: 70%;
+    float: right;
+    margin: 50px 5% 100px 0px;
+    padding: 0px 0px 30px 25px;
+}
+
+#taging_data_table #modify{
+    width: 97%;
+}
+
+.taging_data_tr{
+    /*border: solid 1px #ff9400;*/
+}
+
+.taging_data_number{
+    width: 10%;
+    border-bottom: solid 2px #ff9400;
+}
+
+.taging_data_title{
+    width: 22%;
+    border-bottom: solid 2px #ff9400;
+}
+
+.taging_data_created{
+    width: 10%;
+    border-bottom: solid 2px #ff9400;
+}
+
+.taging_data_log{
+    width: 54%;
+    border-bottom: solid 2px #ff9400;
+}
+
+.data_text_decorations{
+    font-size: 5px;
+    padding-left: 27px;
+}

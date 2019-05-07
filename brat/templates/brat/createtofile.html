@@ -1,0 +1,32 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% for tag_list in taging_list %}
+        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+    {% endfor %}
+{% endblock %}
+
+{% block article_data_list %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="datafile">
+        <p>.txt 파일만 가능합니다.</p>
+        <input type="submit" value="전송">
+    </form>
+{% endblock %}

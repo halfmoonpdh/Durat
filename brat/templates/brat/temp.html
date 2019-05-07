@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <p>HTML5 캔버스</p>
+        <p>
+            『HTML5 캔버스 첫걸음』으로 흥미롭고 인터랙티브한 게임과 엔터테인먼트 애플리케이션을 만드는 방법을 배울 수 있다. HTML5와 자바스크립트를 이용해 <em>캔버스로 그래픽, 애니메이션, 애플리케이션</em>을 만들 수 있다. 캔버스를 사용하면 브라우저 내에 바로 그릴 수 있으며, 데스크톱 컴퓨터와 아이폰이나 안드로이드 같은 모바일 기기에서 모두 실행 가능하다.
+        </p>
+
+        <p>■ HTML5가 제공하는 흥미로운 새 기능과 활용 방법</p>
+    </div>
+
+    <script>
+        function selectRange(obj) {
+            if (window.getSelection) {
+                var selected = window.getSelection();
+                console.log(selected.toString());
+                var rangeobj = selected.getRangeAt(obj);
+
+                console.log(rangeobj.startOffset);
+                console.log(rangeobj.endOffset);
+                console.log(rangeobj.toString());
+            }
+        };
+
+        /* usage example */
+        var content = document.getElementById("content");
+        var paragraph = content.getElementsByTagName("p");
+
+        for(var i = 0; i < paragraph.length; i ++) {
+            paragraph[i].onclick = function() {
+                selectRange(this);
+            };
+        }
+    </script>
+</body>
+</html>

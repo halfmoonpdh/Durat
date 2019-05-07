@@ -1,0 +1,122 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% for tag_list in taging_list %}
+        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+    {% endfor %}
+{% endblock %}
+
+{% block article_data_list %}
+    <table id="taging_data_table" class="table table-bordered">
+        <tr>
+            <td>타이틀</td><td colspan="4">{{ taging_data.taging_data_title }}</td>
+        </tr>
+        <tr>
+            <td>분류</td>
+            <td>{{ taging_data.taging_list }}</td>
+            <td>생성 날짜</td>
+            <td>{{ taging_data.taging_data_created|date:'Y-m-d G:i' }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p style="border-bottom: solid 1px lightgray">
+                    내용
+                    <span id="is_success"></span>
+                </p>
+                {% for i in tad_list %}
+                    {% if i|length < 2 %}
+                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span><a href="{{ forloop.counter }}/tagedit/">{{ forloop.counter }}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;</span></p>
+                    {% else %}
+                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span><a href="{{ forloop.counter }}/tagedit/">{{ forloop.counter }}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="data_text_{{ forloop.counter }}" >{{ i }}</span></p>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered">
+        <td style="paddind_left:20px">
+            <b>--상세 설명--</b> <br><br>
+
+            <span style="background-color: #afeeaf">RE_S(RESEARCH_SUMMARTY)</span><br>
+            &nbsp;&nbsp;상기 정의된 RESEARCH를 기술하는 핵심문장<br>
+
+            <span style="background-color: #C0FFFF">RE_D(RESEARCH_DESCRIPTION)</span><br>
+            &nbsp;&nbsp;상기 정의된 RESEARCH를 기술하는 핵심문장<br>
+
+            <span style="background-color: #D3D3D3">EX_E(EXPERIMENT_EFFECT)</span><br>
+            &nbsp;&nbsp;향후 연구 방향을 기술한 문장<br>
+
+            <span style="background-color: #E7E751">EX_R(EXPERIMENT_RESULT)</span><br>
+            &nbsp;&nbsp;상기 정의된 EXPERIMENT의 결과를 요약하는 문장. <br>
+            &nbsp;&nbsp;또는 RE_S의 결과를 통해 확인되거나 증명된 내용을 기술하는 문장.<br>
+
+            <span style="background-color: #FFC0F5">EX_M(EXPERIMENT_METHOD)</span><br>
+            &nbsp;&nbsp;1)EXPERIMENT의 전체 개요<br>
+            &nbsp;&nbsp;2)EXPERIMENT의 환경<br>
+            &nbsp;&nbsp;3)EXPERIMENT의 과정 등을 기술하는 문장<br>
+
+            <span style="background-color: #ff00ff">PR(PROBLEM)</span><br>
+            &nbsp;&nbsp;논문에서 풀고자 하는 문제점을 기술한 문장<br>
+
+            <span style="background-color: #c894d2">OB(OBJECTIVE)</span><br>
+            &nbsp;&nbsp;논문의 목적(목표)를 기술하는 문장</td>
+    </table>
+    <table id="modify" class="table table-bordered table-hover">
+        <thead align="center">
+            <td width="25%"><a href="{% url 'brat:datarename' taging_list_title=taging_list_title taging_data_id=taging_data_id %}">이름 변경</a></td>
+            <td width="25%"><a href="{% url 'brat:autoannotation' taging_list_title=taging_list_title taging_data_id=taging_data_id %}" id="add_ann">자동태깅</a></td>
+            <td width="25%"><a href="{% url 'brat:dataedit' taging_list_title=taging_list_title taging_data_id=taging_data_id %}">수정</a></td>
+            <td width="25%"><a href="{% url 'brat:datadelete' taging_list_title=taging_list_title taging_data_id=taging_data_id %}">삭제</a></td>
+        </thead>
+        <thead align="center">
+            <td width="25%"><a href="{% url 'brat:datarate' taging_list_title=taging_list_title taging_data_id=taging_data_id %}">통계 정보</a></td>
+            <td width="25%"><a href="{% url 'brat:userratemodify_confirm' taging_list_title=taging_list_title taging_data_id=taging_data_id %}" id="user_logging">(주의) 통계 정보 수정</a></td>
+            <td width="25%"><a href="{% url 'brat:different_user' taging_list_title=taging_list_title taging_data_id=taging_data_id %}">다른사람의 수정내용</a></td>
+            <td width="25%"><a href="">-</a></td>
+        </thead>
+    </table>
+    <script>
+        {% for num, tag in ann_dic.items %}
+            {% if tag == "RE_S" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#AFEEAF");
+                $("#data_text_{{ num }}").css("backgroundColor", "#AFEEAF");
+            {% elif tag == "RE_D" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#C0FFFF");
+                $("#data_text_{{ num }}").css("backgroundColor", "#C0FFFF");
+            {% elif tag == "EX_E" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#D3D3D3");
+                $("#data_text_{{ num }}").css("backgroundColor", "#D3D3D3");
+            {% elif tag == "EX_R" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#E7E751");
+                $("#data_text_{{ num }}").css("backgroundColor", "#E7E751");
+            {% elif tag == "EX_M" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#FFC0F5");
+                $("#data_text_{{ num }}").css("backgroundColor", "#FFC0F5");
+            {% elif tag == "PR" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#ff00ff");
+                $("#data_text_{{ num }}").css("backgroundColor", "#ff00ff");
+            {% elif tag == "OB" %}
+                $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#c894d2");
+                $("#data_text_{{ num }}").css("backgroundColor", "#c894d2");
+            {% endif %}
+        {% endfor %}
+    </script>
+{% endblock %}

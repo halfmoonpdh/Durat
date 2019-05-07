@@ -1,0 +1,38 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawVisualization);
+	
+		function drawVisualization() {
+		    var user_name = ['Month'];
+		    var user_taging_count = ['2019/04']
+            
+            {% for user_name_, user_taging_count_ in USER.items %}
+                user_name.push("{{ user_name_ }}");
+                user_taging_count.push({{ user_taging_count_ }});
+            {% endfor %}
+
+			var data = google.visualization.arrayToDataTable([
+					user_name,
+					user_taging_count
+				]);
+			var options = {
+					title : '월별 태깅 랭킹',
+					vAxis: {title: '태깅 횟수'},
+					hAxis: {title: '월별'},
+					seriesType: 'bars',
+					series: {5: {type: 'line'}}
+				};
+			
+			var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+</head>
+<body>
+	<div id="chart_div" style="width:900px; height: 500px;"></div>
+</body>
+</html>

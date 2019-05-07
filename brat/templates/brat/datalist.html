@@ -1,0 +1,54 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% for tag_list in taging_list %}
+        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+    {% endfor %}
+{% endblock %}
+
+{% block article_data_list %}
+    <p id="article_data_list_taging_list_title" class="lobster_font">
+        {{ taging_list_title }}
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <div class="float-right"><a href="/home/listrename/" style="color: #ff9400;">리스트 이름변경</a></div>
+        <div class="float-right" style="margin-right: 10px;"><a href="/home/listdelete/" style="color: #ff9400;">{{ taging_list_title }}  리스트 삭제</a></div>
+        <div class="float-right" style="margin-right: 10px;"><a href="/home/{{ taging_list_title }}/create_to_file/">+파일로 추가</a></div>
+        <div class="float-right" style="margin-right: 10px;"><a href="/home/{{ taging_list_title }}/create/"> +추가 </a></div>
+    </p>
+    <table id="taging_data_table" class="table table-hover">
+        <thead>
+            <tr class="taging_data_tr">
+                <td class="taging_data_number">번호</td>
+                <td class="taging_data_title">제목</td>
+                <td class="taging_data_created">생성 날짜</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for taging_data in taging_data_list %}
+                <tr>
+                    <td class="taging_data_number">{{ taging_data.id }}</td>
+                    <td class="taging_data_title"><a href="{% url 'brat:detail' taging_data.taging_list taging_data.id %}">{{ taging_data.taging_data_title }}</a></td>
+                    <td class="taging_data_created">{{ taging_data.taging_data_created|date:'Y-m-d G:i' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

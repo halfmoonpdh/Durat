@@ -1,0 +1,12 @@
+<form action="" method="post">
+{% csrf_token %}
+    {% for i in TAG %}
+        {% if i == checked %}
+            <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}" checked="checked"><label for="{{ i }}">{{ i }}</label></p>
+        {% else %}
+            <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}"><label for="{{ i }}">{{ i }}</label></p>
+        {% endif %}
+    {% endfor %}
+        <p><input type="radio" id="tagdelete" name="tag" value="delete"><label for="tagdelete">태그 삭제</label></p>
+    <input type="submit" href="">
+</form>

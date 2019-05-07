@@ -1,0 +1,93 @@
+학습모델을 이용해서
+웹서비스를 구축하기위해
+flask 웹서버를 구축하고
+웹디자인작업 (MD부트스트랩)
+
+소켓프로그래밍
+패킷스니핑?
+
+manage.py
+-장고 프로젝트 관리
+settings.py
+-장고에 관한 각종 설정들
+urls.py
+-홈페이지 주소를 장고와 연결해주는 역할
+wsgi.py
+-장고 실행 서버 관련 설정
+
+app
+admin.py
+-관리자페이지와 관련된 것
+tests.py
+-장고에서 사용하는 템프파일
+models.py
+-데이터베이스와 관련된것
+apps.py
+-관리자페이지를 어떻게 만들것인가
+
+
+브랫/장고/데이터베이스/웹서버/도커
+
+-js
+투두리스트 ->바닐라 js
+인터랙션 ->애니메이션
+라이브러리 ->jquery, react
+
+노드js, express 작은서버 심플하게
+프론트엔드- 백엔드 구동원리
+
+html css -> js -> js라이브버리 -> 백엔드
+전체적인 뷰를 보고 그다음에 결정하고 집중
+
+http.conf    ////////
+<Files "*.py">
+Options ExecCGI
+AddHandler cgi-script .py
+</Files>
+
+document
+window
+ajax
+cookie
+offline web application
+webRTC //facetime
+speech api //voice
+webGL //3demention-game
+webVR //VR
+XML, JSON
+PJAX
+cache, cookie(->web storage)
+proxy
+
+network===
+NAS (Network Attached Storage)
+DNS (Domain Name System) (~DDNS)
+Https (security) (let's encript : free certification)
+SSL
+
+장고---
+http://suspected.tistory.com/172?category=647588
+https://www.youtube.com/watch?v=Fn2XMeRmwe4
+https://www.slideshare.net/perhapsspy/django-44664022
+
+노드---
+https://opentutorials.org/course/3332/21030
+
+웹파---
+https://opentutorials.org/course/3256/19789
+
+구상 → 기획 → 디자인 → 개발 → 테스트 → 피드백
+
+
+팍스넷/ 훈아저씨/ 용돈
+
+pythonany, ubunmardb, djan
+half
+Helena1127@
+
+Git, dock
+Helena1127!
+
+ins
+enqn0903@naver
+engud0903

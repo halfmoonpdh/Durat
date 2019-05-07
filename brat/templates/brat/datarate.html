@@ -1,0 +1,52 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% for tag_list in taging_list %}
+        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+    {% endfor %}
+{% endblock %}
+
+{% block article_data_list %}
+    <p id="article_data_list_taging_list_title" class="lobster_font_for_korean">
+        {{ taging_data }}
+    </p>
+    <table id="taging_data_table" class="table table-hover">
+        <thead>
+            <tr class="taging_data_tr">
+                <td class="taging_data_number">번호</td>
+                <td class="taging_data_title">텍스트</td>
+                <td class="taging_data_created">태그</td>
+                <td class="taging_data_log">로그</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for taging_rate in taging_rate_list %}
+                {% if taging_rate.taging_text %}
+                    <tr>
+                        <td class="taging_data_number">{{ taging_rate.taging_number }}</td>
+                        <td class="taging_data_title"><input type="text" value="{{ taging_rate.taging_text }}"></td>
+                        <td class="taging_data_created">{{ taging_rate.taging_tag }}</td>
+                        <td class="taging_data_log">{{ taging_rate.taging_log | linebreaksbr }}</td>
+                    </tr>
+                {% else %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

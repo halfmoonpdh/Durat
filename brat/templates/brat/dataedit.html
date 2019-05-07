@@ -1,0 +1,35 @@
+{% extends 'brat/base.html' %}
+
+{% block title %}
+    DURAT
+{% endblock %}
+
+{% block header_is_login %}
+    {% if user.is_authenticated %}
+        <div>{{ user.username }}</div>
+        <div><a href="{% url 'logout' %}">logout</a></div>
+    {% else %}
+        <div>You are not logged in</div>
+        <div><a href="{% url 'login' %}">login</a></div>
+        <div><a href="{% url 'brat:signup' %}">Sign Up</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block aside_data_list %}
+    {% for tag_list in taging_list %}
+        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+    {% endfor %}
+{% endblock %}
+
+{% block article_data_list %}
+    <form action="" method="post" accept-charset="UTF-8">
+        {% csrf_token %}
+        <p>title : {{ title }}</p>
+        <p>detail :</p>
+        <textarea name="detail" cols="50" rows="8">{{ detail }}</textarea>
+        <p>ann :</p>
+        <textarea name="ann" cols="50" rows="8">{{ ann }}</textarea>
+        <input type="submit" value="수정">
+    </form>
+{% endblock %}
