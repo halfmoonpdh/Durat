@@ -71,7 +71,7 @@ def listcreate(request):
 def datalist(request, taging_list_title, message=None):
     taging_list = TagingList.objects.all()
     taging_list_title_id = TagingList.objects.get(taging_list_title=taging_list_title)
-    taging_data_list = TagingData.objects.filter(taging_list=taging_list_title_id).order_by('taging_data_created')
+    taging_data_list = TagingData.objects.filter(taging_list=taging_list_title_id).order_by('-taging_data_created')
 
     return render(request, 'brat/datalist.html', {'taging_data_list': taging_data_list, 'taging_list': taging_list,
                                                   'taging_list_title': taging_list_title, 'message': message})
@@ -271,14 +271,31 @@ def datarate(request, taging_list_title, taging_data_id):
 def different_user(request, taging_list_title, taging_data_id):
     taging_list = TagingList.objects.all()
     taging_data = TagingData.objects.get(pk=taging_data_id)
+    tad_list = taging_data.taging_data_detail.split("\n")
     taging_data_user_log = TagingDataRate.objects.filter(taging_data=taging_data)
 
-    taging_user = []
+    taging_user_tag = {}
 
     for taging_data_rate_taging_log in taging_data_user_log:
-        taging_user.append(taging_data_rate_taging_log.taging_log.split()[2])
+        tag_user = taging_data_rate_taging_log.taging_log.split()[2]
+        taging_number = taging_data_rate_taging_log.taging_number
 
-    return render(request, 'brat/DiffrentUser.html', {'taging_list': taging_list})
+        if tag_user == "auto":
+            continue
+        if tag_user not in taging_user_tag:
+            taging_user_tag[tag_user] = []
+
+        seperate_logs = taging_data_rate_taging_log.taging_log.split("\n")
+        for seperate_log in seperate_logs:
+            if seperate_log == "":
+                continue
+            tag_user = seperate_log.split()[2]
+            if tag_user == "auto":
+                continue
+            taging_user_tag[tag_user].append(str(taging_number) + "번 " + seperate_log + "\n")
+
+    return render(request, 'brat/DiffrentUser.html', {'taging_list': taging_list, "taging_user_tag": taging_user_tag,
+                                                      'tad_list': tad_list})
 
 @login_required
 def userratemodify(request, taging_list_title, taging_data_id):

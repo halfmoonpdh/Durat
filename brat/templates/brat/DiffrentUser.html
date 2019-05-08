@@ -23,5 +23,27 @@
 {% endblock %}
 
 {% block article_data_list %}
-
+    {% for taging_user, taging_user_taging in taging_user_tag.items %}
+        <div style="margin-bottom: 50px">
+            <p class="lobster_font" style="color: #ff9400; font-size: 45px">{{ taging_user }}</p>
+            {% for taging_user_taging_line in taging_user_taging %}
+                <p>{{ taging_user_taging_line }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <table class="table table-bordered">
+        {% for i in tad_list %}
+            <tr>
+                <td style="border: solid 1px #ff9400">
+                    {% if i|length < 2 %}
+                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span>{{ forloop.counter }}&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;</span></p>
+                    {% else %}
+                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span>{{ forloop.counter }}&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="data_text_{{ forloop.counter }}">{{ i }}</span></p>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
