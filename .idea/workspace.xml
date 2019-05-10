@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01069c9d-7439-4fe2-ab59-0ce522423ff1" name="Default Changelist" comment="" />
+    <list default="true" id="01069c9d-7439-4fe2-ab59-0ce522423ff1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/brat/migrations/0019_auto_20190511_0201.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brat/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/brat/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brat/templates/brat/datalist.html" beforeDir="false" afterPath="$PROJECT_DIR$/brat/templates/brat/datalist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/brat/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/brat/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/22_0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/22_1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/23_10.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/23_11.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/23_12.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/brat/science/23_13.txt" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,11 +32,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/brat/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="269" column="15" lean-forward="true" selection-start-line="269" selection-start-column="15" selection-end-line="269" selection-end-column="15" />
+                <state relative-caret-position="331">
+                  <caret line="357" column="33" lean-forward="true" selection-start-line="357" selection-start-column="33" selection-end-line="357" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#36#0" expanded="true" />
                   </folding>
@@ -35,16 +48,16 @@
             <entry file="file://$PROJECT_DIR$/brat/templates/brat/base.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="418">
-                  <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+                  <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dumuzzi/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1273">
-                  <caret line="76" column="15" lean-forward="true" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="15" />
+                <state relative-caret-position="190">
+                  <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
                   <folding>
                     <element signature="e#308#317#0" expanded="true" />
                   </folding>
@@ -55,8 +68,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="475">
-                  <caret line="25" column="74" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+                <state relative-caret-position="190">
+                  <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -67,8 +80,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/static/css/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1786">
-                  <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+                <state relative-caret-position="114">
+                  <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -77,11 +90,23 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/brat/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="140">
+                  <caret line="509" column="59" selection-start-line="509" selection-start-column="59" selection-end-line="509" selection-end-column="59" />
+                  <folding>
+                    <element signature="e#0#36#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="619">
-                  <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="15" />
+                <state relative-caret-position="19">
+                  <caret line="16" column="73" lean-forward="true" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -89,11 +114,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/templates/brat/detail.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="572">
-                  <caret line="100" column="10" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
+                <state relative-caret-position="230">
+                  <caret line="25" column="62" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="62" />
                 </state>
               </provider>
             </entry>
@@ -101,8 +126,14 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/templates/brat/DiffrentUser.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="475">
-                  <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+                <state relative-caret-position="500">
+                  <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+                  <folding>
+                    <element signature="e#830#857#0#HTML" expanded="true" />
+                    <element signature="e#867#906#0#HTML" expanded="true" />
+                    <element signature="e#1266#1299#0#HTML" expanded="true" />
+                    <element signature="e#1512#1518#0#HTML" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -110,8 +141,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/brat/templates/brat/datalist.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="228">
-                  <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" selection-end-column="29" />
+                <state relative-caret-position="551">
+                  <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
                 </state>
               </provider>
             </entry>
@@ -140,12 +171,14 @@
       <find>article_data_list</find>
       <find>create</find>
       <find>save</find>
-      <find>taging_count</find>
       <find>auto</find>
       <find>aut</find>
       <find>ff9400</find>
       <find>datalist</find>
       <find>now</find>
+      <find>article_data_list_taging_list_title</find>
+      <find>tad_list</find>
+      <find>taging_count</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -198,19 +231,19 @@
         <option value="$PROJECT_DIR$/brat/static/css/style2.css" />
         <option value="$PROJECT_DIR$/brat/static/js/ajax.js" />
         <option value="$PROJECT_DIR$/brat/templates/brat/UserRate.html" />
-        <option value="$PROJECT_DIR$/brat/templates/brat/datalist.html" />
         <option value="$PROJECT_DIR$/brat/templates/brat/home.html" />
         <option value="$PROJECT_DIR$/brat/templates/brat/AllDocument.html" />
-        <option value="$PROJECT_DIR$/brat/models.py" />
         <option value="$PROJECT_DIR$/dumuzzi/wsgi.py" />
         <option value="$PROJECT_DIR$/dumuzzi/secret.json" />
         <option value="$PROJECT_DIR$/dumuzzi/settings.py" />
         <option value="$PROJECT_DIR$/brat/jongmodel.py" />
-        <option value="$PROJECT_DIR$/brat/templates/brat/DiffrentUser.html" />
-        <option value="$PROJECT_DIR$/brat/urls.py" />
         <option value="$PROJECT_DIR$/brat/templates/brat/detail.html" />
-        <option value="$PROJECT_DIR$/brat/views.py" />
         <option value="$PROJECT_DIR$/brat/templates/brat/base.html" />
+        <option value="$PROJECT_DIR$/brat/templates/brat/DiffrentUser.html" />
+        <option value="$PROJECT_DIR$/brat/templates/brat/datalist.html" />
+        <option value="$PROJECT_DIR$/brat/urls.py" />
+        <option value="$PROJECT_DIR$/brat/models.py" />
+        <option value="$PROJECT_DIR$/brat/views.py" />
       </list>
     </option>
   </component>
@@ -220,9 +253,16 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-4" />
-    <option name="width" value="1749" />
+    <option name="x" value="-7" />
+    <option name="width" value="2021" />
     <option name="height" value="1087" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -246,13 +286,13 @@
             <path>
               <item name="dumuzzi" type="b2602c69:ProjectViewProjectNode" />
               <item name="dumuzzi" type="462c0819:PsiDirectoryNode" />
-              <item name="brat" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dumuzzi" type="b2602c69:ProjectViewProjectNode" />
               <item name="dumuzzi" type="462c0819:PsiDirectoryNode" />
-              <item name="dumuzzi" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="brat" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -263,6 +303,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/brat/static/css" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -271,15 +312,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\공유폴더\django\python-project\dumuzzi\brat\templates\brat" />
-      <recent name="C:\Users\halfm\django\python-project\dumuzzi\brat" />
-      <recent name="C:\Users\halfm\django\python-project\dumuzzi" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\공유폴더\django\python-project\dumuzzi\brat\static\css" />
       <recent name="C:\Users\halfm\django\python-project\dumuzzi\brat\templates\brat" />
       <recent name="C:\Users\halfm\django\python-project\dumuzzi\brat" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\공유폴더\django\python-project\dumuzzi\brat\templates\brat" />
+      <recent name="C:\Users\halfm\django\python-project\dumuzzi\brat" />
+      <recent name="C:\Users\halfm\django\python-project\dumuzzi" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -422,30 +463,38 @@
       <workItem from="1556975284971" duration="894000" />
       <workItem from="1556980404651" duration="600000" />
       <workItem from="1557063159820" duration="3588000" />
-      <workItem from="1557154195046" duration="5199000" />
+      <workItem from="1557154195046" duration="25377000" />
     </task>
+    <task id="LOCAL-00001" summary="show diffrent_user Tag">
+      <created>1557314955376</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557314955376</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335284000" />
+    <option name="totallyTimeSpent" value="355462000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="0" width="1749" height="1087" extended-state="0" />
+    <frame x="-7" y="0" width="2021" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19123742" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16471188" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32914045" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32843652" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5008104" side_tool="true" weight="0.32914045" />
       <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="manage.py@dumuzzi" order="4" visible="true" weight="0.32809225" />
-      <window_info anchor="bottom" id="Python Console" order="5" weight="0.32809225" />
+      <window_info anchor="bottom" id="manage.py@dumuzzi" order="4" weight="0.32738718" />
+      <window_info anchor="bottom" id="Python Console" order="5" weight="0.32738718" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Find" order="8" weight="0.32914045" />
-      <window_info anchor="bottom" id="Run" order="9" sideWeight="0.49918962" visible="true" weight="0.18887722" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32843652" />
+      <window_info active="true" anchor="bottom" id="Run" order="9" sideWeight="0.49918962" visible="true" weight="0.22770199" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -461,12 +510,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="show diffrent_user Tag" />
+    <option name="LAST_COMMIT_MESSAGE" value="show diffrent_user Tag" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/static/js/ajax.js" />
-    <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/templates/brat/datarate.html" />
-    <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/templates/brat/admin.html" />
-    <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/templates/brat/datalist.html" />
-    <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/templates/brat/base.html" />
     <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/templates/brat/detail.html" />
     <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/dumuzzi/urls.py" />
     <entry file="file:F:/..//F:/공유폴더/django/python-project/dumuzzi/brat/urls.py" />
@@ -539,16 +587,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/brat/templates/brat/admin.html" />
     <entry file="file://$PROJECT_DIR$/brat/templates/brat/adminbase.html" />
-    <entry file="file://$PROJECT_DIR$/brat/static/js/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brat/static/css/style2.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="696">
@@ -556,32 +594,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/brat/science/22_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/brat/science/23_10.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/brat/science/23_11.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/python_study/example_glob.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/brat/science/23_12.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="123" column="22" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="22" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/media/brat/science/23_13.txt">
       <provider selected="true" editor-type-id="text-editor" />
@@ -598,13 +612,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dumuzzi/secret.json" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/is-CJ9BE.tmp/editor-test.txt" />
-    <entry file="file://$PROJECT_DIR$/brat/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1786">
-          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brat/templates/brat/AllDocument.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -626,13 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/templates/brat/datalist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/brat/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -650,63 +650,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/urls.py">
+    <entry file="file://$PROJECT_DIR$/dumuzzi/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="74" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
+        <state relative-caret-position="190">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#308#317#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/models.py">
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/dataedit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="627">
+          <caret line="33" column="11" lean-forward="true" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/templates/brat/DiffrentUser.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/create.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/templates/brat/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="100" column="10" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/tagedit.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/brat/views.py">
+    <entry file="file://$PROJECT_DIR$/brat/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="269" column="15" lean-forward="true" selection-start-line="269" selection-start-column="15" selection-end-line="269" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="114">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/brat/templates/brat/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
-          <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dumuzzi/settings.py">
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="76" column="15" lean-forward="true" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="15" />
+        <state relative-caret-position="230">
+          <caret line="25" column="62" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/static/js/ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#308#317#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/DiffrentUser.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+          <folding>
+            <element signature="e#830#857#0#HTML" expanded="true" />
+            <element signature="e#867#906#0#HTML" expanded="true" />
+            <element signature="e#1266#1299#0#HTML" expanded="true" />
+            <element signature="e#1512#1518#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/signup.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/brat/science/23_12.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2337">
+          <caret line="123" column="22" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/brat/science/23_11.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/brat/science/23_10.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/brat/science/22_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/brat/science/22_0.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/templates/brat/datalist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="16" column="73" lean-forward="true" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brat/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="509" column="59" selection-start-line="509" selection-start-column="59" selection-end-line="509" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

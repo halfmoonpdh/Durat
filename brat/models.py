@@ -9,7 +9,7 @@ class TagingList(models.Model):
         return self.taging_list_title
 
 class TagingData(models.Model):
-    taging_data_title = models.CharField(max_length=200, unique=True)
+    taging_data_title = models.CharField(max_length=200)
     taging_data_detail = models.TextField()
     taging_data_created = models.DateTimeField(auto_now_add=True)
     taging_Data_modified = models.DateTimeField(null=True, blank=True)

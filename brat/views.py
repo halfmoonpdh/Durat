@@ -37,7 +37,7 @@ def home(request, message=None, is_admin=False):
         if type(request.user).__name__ == "SimpleLazyObject":
             user = User.objects.get(username=request.user.username)
             user_ = Profile.objects.get(user_id=user.id)
-            if user_.taging_count:
+            if not user_.taging_count:
                 message = "관리자모드로 접속 완료"
                 return render(request, 'brat/home.html',
                               {'taging_list': taging_list, 'taging_list_count': taging_list_count,
@@ -59,8 +59,8 @@ def listcreate(request):
             return home(request, message)
         else:
             if re.compile('[A-Za-z_]+').match(request.POST['listname']):
+                os.mkdir('media/brat/' + request.POST['listname'])
                 TagingList.objects.create(taging_list_title=request.POST['listname'])
-                os.mkdir('media/brat/'+request.POST['listname']+'/')
                 return HttpResponseRedirect("/home")
             else:
                 message = "영어 대소문자 및 _만 사용가능합니다."
@@ -71,7 +71,7 @@ def listcreate(request):
 def datalist(request, taging_list_title, message=None):
     taging_list = TagingList.objects.all()
     taging_list_title_id = TagingList.objects.get(taging_list_title=taging_list_title)
-    taging_data_list = TagingData.objects.filter(taging_list=taging_list_title_id).order_by('-taging_data_created')
+    taging_data_list = TagingData.objects.filter(taging_list_id=taging_list_title_id.id).order_by('-taging_data_created')
 
     return render(request, 'brat/datalist.html', {'taging_data_list': taging_data_list, 'taging_list': taging_list,
                                                   'taging_list_title': taging_list_title, 'message': message})
@@ -89,13 +89,14 @@ def create_to_file(request, taging_list_title):
             data_name = data_location.split("\\")[-1].split(".")[0]
             if (data_type == "txt"):
                 # txt면 데이터를 하나 만들고 삭제하기
-                with open(str(newdata), 'r') as f:
+                with open(str(newdata), 'r', encoding='utf-8') as f:
                     text_from_txt = f.read()
                     taging_data = TagingData.objects.create(
                         taging_data_title=data_name,
                         taging_data_detail=text_from_txt,
                         taging_data_ann="",
                         taging_list=TagingList.objects.get(taging_list_title=taging_list_title))
+                    print(text_from_txt)
                     taging_data.save()
                 makeratemodel(taging_list_title, taging_data.id)
                 newdata.delete()
@@ -277,21 +278,19 @@ def different_user(request, taging_list_title, taging_data_id):
     taging_user_tag = {}
 
     for taging_data_rate_taging_log in taging_data_user_log:
-        tag_user = taging_data_rate_taging_log.taging_log.split()[2]
         taging_number = taging_data_rate_taging_log.taging_number
 
-        if tag_user == "auto":
-            continue
-        if tag_user not in taging_user_tag:
-            taging_user_tag[tag_user] = []
-
         seperate_logs = taging_data_rate_taging_log.taging_log.split("\n")
+
         for seperate_log in seperate_logs:
             if seperate_log == "":
                 continue
             tag_user = seperate_log.split()[2]
             if tag_user == "auto":
                 continue
+            if tag_user not in taging_user_tag:
+                taging_user_tag[tag_user] = []
+
             taging_user_tag[tag_user].append(str(taging_number) + "번 " + seperate_log + "\n")
 
     return render(request, 'brat/DiffrentUser.html', {'taging_list': taging_list, "taging_user_tag": taging_user_tag,
@@ -327,10 +326,9 @@ def userratemodify_confirm(request, taging_list_title, taging_data_id):
 def makeratemodel(taging_list_title, taging_data_id):
     taging_data = get_object_or_404(TagingData, pk=taging_data_id)
     taging_data_rate = TagingDataRate.objects.filter(taging_data_id=taging_data_id)
-    tad_list = taging_data.taging_data_detail.split("\r\n")
+    tad_list = taging_data.taging_data_detail.split("\n")
     taging_data_ann = taging_data.taging_data_ann.split("\r\n")
     num = 1
-    temp = ""
     # 데이터베이스 저장 후 초기화 해야함
     # 만들어지자마자 모델 만들때
     if taging_data.tagingdatarate_set.count() == 0:
@@ -445,7 +443,7 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
             taging_data.taging_data_ann = ta
             taging_data.save()
 
-            taging_data_rate.taging_log += ""+s + " " + request.user.username + " " + request.POST['tag'] + "추가 \n"
+            taging_data_rate.taging_log += ""+s + " " + request.user.username + " " + request.POST['tag'] + " 추가 \n"
             taging_data_rate.taging_tag = request.POST['tag']
             taging_data_rate.save()
 
@@ -474,7 +472,7 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
 def admin(request):
     user_ = User.objects.get(username=request.user.username)
     user = Profile.objects.get(user_id=user_.id)
-    user.taging_count = 1
+    user.taging_count = 0
     user.save()
 
     return HttpResponseRedirect("/home")
@@ -483,7 +481,7 @@ def admin(request):
 def admin_derestrict(request):
     user_ = User.objects.get(username=request.user.username)
     user = Profile.objects.get(user_id=user_.id)
-    user.taging_count = 0
+    user.taging_count = 1
     user.save()
 
     return HttpResponseRedirect("/home")
@@ -507,3 +505,48 @@ def admin_month_rate(request):
         USER[user__] = user.document_taging_count
 
     return render(request, 'brat/UserRate.html', {'user': user_, 'USER': USER})
+
+def temp(request):
+    filelist = os.listdir("C:/Users/user/Desktop/ann파일/chem")
+    txtfilelist = []
+    for file in filelist:
+        if file[-3:] == "txt":
+            txtfilelist.append(file)
+    print(txtfilelist)
+
+    taging_list_title = "chemistry"
+
+    for txtfile in txtfilelist[:]:
+        with open("C:/Users/user/Desktop/ann파일/chem/"+txtfile, 'r', encoding="utf-8") as f:
+            all_text = f.read().split("\n")
+            detail = ""
+            for text_with_point in all_text[2:]:
+                # 빈 문자열이면 다음차례로
+                if text_with_point == "":
+                    continue
+                # 앞에 태깅했던게 있으면 지워주고~
+                for tag in TAG:
+                    if text_with_point.find(tag + "\t") > -1:
+                        text_with_point = text_with_point.replace(tag + "\t", "")
+                # 맨 뒤에 .으로 끝나면 지워주고~
+                if text_with_point[-2:] == ". ":
+                    text_with_point = text_with_point[:-2]
+                if text_with_point[-1:] == ".":
+                    text_with_point = text_with_point[:-1]
+                # .을 기준으로 텍스트 분리
+                for text_without_tag in text_with_point.split(". "):
+                    detail += text_without_tag+". \n"
+
+            taging_data = TagingData.objects.create(
+                taging_data_title=all_text[0],
+                taging_data_detail=detail,
+                taging_data_ann="",
+                taging_list=TagingList.objects.get(taging_list_title=taging_list_title))
+            taging_data.save()
+            makeratemodel(taging_list_title, taging_data.id)
+
+    return HttpResponseRedirect("/home")
+
+def all_delete():
+    all_delete_data_and_datarate = TagingData.objects.all()
+    all_delete_data_and_datarate.delete()
