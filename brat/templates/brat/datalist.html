@@ -42,13 +42,40 @@
             </tr>
         </thead>
         <tbody>
-            {% for taging_data in taging_data_list %}
-                <tr>
-                    <td class="taging_data_number">{{ taging_data.id }}</td>
-                    <td class="taging_data_title"><a href="{% url 'brat:detail' taging_data.taging_list taging_data.id %}">{{ taging_data.taging_data_title }}</a></td>
-                    <td class="taging_data_created">{{ taging_data.taging_data_created|date:'Y-m-d G:i' }}</td>
-                </tr>
-            {% endfor %}
+            {% if taging_data_list %}
+                {% for taging_data in taging_data_list %}
+                    <tr>
+                        <td class="taging_data_number">{{ taging_data.id }}</td>
+                        <td class="taging_data_title"><a href="{% url 'brat:detail' taging_data.taging_list taging_data.id %}">{{ taging_data.taging_data_title }}</a></td>
+                        <td class="taging_data_created">{{ taging_data.taging_data_created|date:'Y-m-d G:i' }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                No Data.
+            {% endif %}
         </tbody>
     </table>
+    <table cellspacing=1 >
+        <tr>
+            <td>
+                {% for page in totalPageList %}
+                    <a href="{% url 'brat:datalist' taging_list_title=taging_list_title %}?current_page={{ page }}" >
+                        [
+                        {% ifequal page current_page %}
+                            <b>
+                        {% endifequal %}
+                        {{page}}
+
+                        {% ifequal page current_page  %}
+                            </b>
+                        {% endifequal %}
+                        ]
+                    </a>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+
+
 {% endblock %}

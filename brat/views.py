@@ -68,13 +68,40 @@ def listcreate(request):
 
     return render(request, "brat/listcreate.html", {})
 
-def datalist(request, taging_list_title, message=None):
+class Page_Helper():
+
+    def get_total_page(self, total_cnt, rows_per_page):
+        if((total_cnt % rows_per_page) == 0):
+            self.total_pages = total_cnt / rows_per_page
+        else:
+            self. total_pages = (total_cnt / rows_per_page) + 1
+
+        for i in range(int(self.total_pages)):
+            self.total_page_list.append(i+1)
+
+        return self.total_page_list
+
+    def __init__(self):
+        self.total_pages = 0
+        self.total_page_list = []
+
+def datalist(request, taging_list_title, current_page=1,rows_per_page=50, message=None):
+    if request.GET.get('current_page'):
+        current_page = int(request.GET.get('current_page'))
+    else:
+        current_page = 1
     taging_list = TagingList.objects.all()
     taging_list_title_id = TagingList.objects.get(taging_list_title=taging_list_title)
-    taging_data_list = TagingData.objects.filter(taging_list_id=taging_list_title_id.id).order_by('-taging_data_created')
+    taging_data_list = TagingData.objects.filter(taging_list_id=taging_list_title_id.id).order_by('-taging_data_created')[(current_page-1)*rows_per_page:current_page*rows_per_page]
+    total_cnt = TagingData.objects.filter(taging_list_id=taging_list_title_id.id).count()
+
+    page_helper = Page_Helper()
+    total_page_list = page_helper.get_total_page(total_cnt, rows_per_page)
 
     return render(request, 'brat/datalist.html', {'taging_data_list': taging_data_list, 'taging_list': taging_list,
-                                                  'taging_list_title': taging_list_title, 'message': message})
+                                                  'taging_list_title': taging_list_title, 'message': message,
+                                                  'totalPageList': total_page_list, 'total_cnt': total_cnt,
+                                                  'current_page': current_page})
 
 @login_required
 def create_to_file(request, taging_list_title):
@@ -512,7 +539,6 @@ def temp(request):
     for file in filelist:
         if file[-3:] == "txt":
             txtfilelist.append(file)
-    print(txtfilelist)
 
     taging_list_title = "chemistry"
 
