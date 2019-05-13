@@ -16,10 +16,17 @@
 {% endblock %}
 
 {% block aside_data_list %}
-    {% for tag_list in taging_list %}
-        <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
-        <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
-    {% endfor %}
+    {% if admin %}
+        <a href="{% url 'brat:admin_all_document' %}">
+        <div class="aside_data_list_text lobster_font">All Document</div></a>
+        <a href="{% url 'brat:admin_month_rate' %}">
+        <div class="aside_data_list_text lobster_font">Month rate</div></a>
+    {% else %}
+        {% for tag_list in taging_list %}
+            <a href="{% url 'brat:datalist' tag_list.taging_list_title %}">
+            <div class="aside_data_list_text lobster_font">{{ tag_list.taging_list_title }}</div></a>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block article_data_list %}

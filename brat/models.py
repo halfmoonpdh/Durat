@@ -18,6 +18,7 @@ class TagingData(models.Model):
     taging_file = models.FileField(null=True, blank=True)
     taging_is_taging = models.BooleanField(default=False)
     taging_modified = models.IntegerField(default=0)
+    taging_is_full_tag = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.taging_data_title
@@ -50,3 +51,11 @@ class TagingDataRate(models.Model):
 
     def __str__(self):
         return self.taging_text
+
+class LatestTagingData(models.Model):
+    latest_taging_time = models.DateTimeField(auto_now_add=True)
+    latest_taging_user = models.CharField(max_length=50)
+    latest_taging_number = models.IntegerField()
+
+    def __str__(self):
+        return self.latest_taging_number

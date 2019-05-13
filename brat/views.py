@@ -533,6 +533,42 @@ def admin_month_rate(request):
 
     return render(request, 'brat/UserRate.html', {'user': user_, 'USER': USER})
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def temp(request):
     filelist = os.listdir("C:/Users/user/Desktop/ann파일/chem")
     txtfilelist = []
