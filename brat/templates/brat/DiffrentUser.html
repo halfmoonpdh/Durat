@@ -23,14 +23,31 @@
 {% endblock %}
 
 {% block article_data_list %}
-    {% for taging_user, taging_user_taging in taging_user_tag.items %}
-        <div style="margin-bottom: 50px">
-            <p class="lobster_font" style="color: #ff9400; font-size: 45px">{{ taging_user }}</p>
-            {% for taging_user_taging_line in taging_user_taging %}
-                <p>{{ taging_user_taging_line }}</p>
+    <div style="margin-bottom: 50px">
+        <p style="color: #ff9400; font-size: 45px">간단 태깅 로그</p>
+        <table>
+            <tr>
+                <td>문장</td>
+                {% for taging_user, taging_user_taging in taging_user_tag.items %}
+                    <td class="lobster_font" style="color: black; font-size: 15px">{{ taging_user }}</td>
+                {% endfor %}
+            </tr>
+            {% for tad_list_count in tad_list %}
+                {% with loopcounter=forloop.counter %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    {% for taging_user, taging_user_taging in taging_user_tag.items %}
+                        {% for number, tag in taging_user_taging.items %}
+                            {% if loopcounter == number %}
+                                <td style="color: black; font-size: 15px">{{ tag }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </tr>
+                {% endwith %}
             {% endfor %}
-        </div>
-    {% endfor %}
+        </table>
+    </div>
     <table class="table table-bordered">
         {% for i in tad_list %}
             <tr>

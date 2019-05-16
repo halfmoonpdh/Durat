@@ -23,16 +23,26 @@
             {% endblock %}
         </span>
 </header>
-<aside id="aside_data_list">
-    {% block aside_data_list %}
-    {% endblock %}
-</aside>
-<main>
-    <article id="article_data_list">
-        {% block article_data_list %}
+<div>
+    <aside id="aside_data_list">
+        {% block aside_data_list %}
         {% endblock %}
-    </article>
-</main>
+    </aside>
+</div>
+<div>
+    <div>
+        <article id="article_data_list">
+            {% block article_data_list %}
+            {% endblock %}
+        </article>
+    </div>
+    <div>
+        <article id="latest_data_list">
+            {% block article_latest_data_list %}
+            {% endblock %}
+        </article>
+    </div>
+</div>
 <script type="text/javascript" src="/static/js/ajax.js"></script>
 </body>
 </html>

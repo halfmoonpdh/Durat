@@ -67,6 +67,13 @@ a { text-decoration:none }
     padding: 0px 0px 30px 25px;
 }
 
+#latest_data_list {
+    width: 70%;
+    float: right;
+    margin: 50px 5% 100px 0px;
+    padding: 0px 0px 30px 25px;
+}
+
 #taging_data_table #modify{
     width: 97%;
 }

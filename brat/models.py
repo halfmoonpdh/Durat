@@ -56,6 +56,8 @@ class LatestTagingData(models.Model):
     latest_taging_time = models.DateTimeField(auto_now_add=True)
     latest_taging_user = models.CharField(max_length=50)
     latest_taging_number = models.IntegerField()
+    latest_taging_title = models.CharField(max_length=60, default="")
+    latest_taging_text = models.CharField(max_length=200, default="")
 
     def __str__(self):
-        return self.latest_taging_number
+        return self.latest_taging_user

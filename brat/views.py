@@ -33,22 +33,31 @@ class SignUp(generic.CreateView):
 def home(request, message=None, is_admin=False):
     taging_list = TagingList.objects.all()
     taging_list_count = taging_list.count()
+    taging_is_full_data = TagingData.objects.exclude(taging_is_full_tag=0)
+
+    latest_taging_data = None
+    if LatestTagingData.objects.filter(latest_taging_user=request.user.username).exists():
+        latest_taging_data = LatestTagingData.objects.filter(latest_taging_user=request.user.username).order_by('-latest_taging_time')
+
+    home_dict = {'taging_list': taging_list, 'taging_list_count': taging_list_count, 'message': message,
+                 'latest_taging_datas': latest_taging_data, 'taging_is_full_datas': taging_is_full_data}
+
     try:
         if type(request.user).__name__ == "SimpleLazyObject":
             user = User.objects.get(username=request.user.username)
             user_ = Profile.objects.get(user_id=user.id)
             if not user_.taging_count:
                 message = "관리자모드로 접속 완료"
+                home_dict['admin']=True
                 return render(request, 'brat/home.html',
-                              {'taging_list': taging_list, 'taging_list_count': taging_list_count,
-                               'message': message, 'admin': True})
+                              home_dict)
             else:
+                home_dict['admin']=False
                 return render(request, 'brat/home.html',
-                              {'taging_list': taging_list, 'taging_list_count': taging_list_count,
-                               'message': message, 'admin': False})
+                              home_dict)
     except:
-        return render(request, "brat/home.html", {'taging_list': taging_list, 'taging_list_count': taging_list_count,
-                           'message': message, 'admin': False})
+        home_dict['admin']=False
+        return render(request, "brat/home.html", home_dict)
 
 @login_required
 def listcreate(request):
@@ -183,10 +192,27 @@ def listdelete(request, taging_list_title):
 
 
 def detail(request, taging_list_title, taging_data_id, is_success=False):
+    if type(taging_list_title) == int:
+        taging_list_title_object = TagingList.objects.get(pk=taging_list_title)
+        taging_list_title = taging_list_title_object.taging_list_title
     taging_data = TagingData.objects.get(pk=taging_data_id)
     tad_list = taging_data.taging_data_detail.split("\n")
     taging_list = TagingList.objects.all()
 
+    # 공백 방지
+    if " " in tad_list:
+        tad_list.remove(" ")
+        tad_list_temp = ""
+        tad_list_temp += "\n".join(tad_list)
+        taging_data.taging_data_detail = tad_list_temp
+        taging_data.save()
+    # 빈문자열 방지
+    if "" in tad_list:
+        tad_list.remove("")
+        tad_list_temp = ""
+        tad_list_temp += "\n".join(tad_list)
+        taging_data.taging_data_detail = tad_list_temp
+        taging_data.save()
 
     taging_data_ann = taging_data.taging_data_ann
     ann = taging_data_ann.split("\r\n")
@@ -274,8 +300,16 @@ def autoannotation(request, taging_list_title, taging_data_id):
     s = get_time()
     for i in tad_list:
         temp = model_predict(i)
-        result = result+str(j)+" "+temp+"\r\n"
         taging_data_rate = TagingDataRate.objects.get(taging_data_id=taging_data_id, taging_number=j)
+        # 원래 태그가 존재하면 삭제
+        if taging_data_rate.taging_tag is not "":
+            ann_temp = taging_data.taging_data_ann.replace(str(j)+" "+taging_data_rate.taging_tag, str(j)+" "+temp)
+            taging_data.taging_data_ann = ann_temp
+            taging_data.save()
+        else:
+            result = result + str(j) + " " + temp + "\r\n"
+
+        taging_data_rate.taging_tag = temp
         taging_data_rate.taging_log += s + " " + "auto" + " " + temp + "추가 \n"
         taging_data_rate.save()
         j = j+1
@@ -306,19 +340,23 @@ def different_user(request, taging_list_title, taging_data_id):
 
     for taging_data_rate_taging_log in taging_data_user_log:
         taging_number = taging_data_rate_taging_log.taging_number
-
         seperate_logs = taging_data_rate_taging_log.taging_log.split("\n")
 
         for seperate_log in seperate_logs:
             if seperate_log == "":
                 continue
             tag_user = seperate_log.split()[2]
-            if tag_user == "auto":
-                continue
             if tag_user not in taging_user_tag:
-                taging_user_tag[tag_user] = []
+                taging_user_tag[tag_user] = {}
 
-            taging_user_tag[tag_user].append(str(taging_number) + "번 " + seperate_log + "\n")
+            if seperate_log.find("변경") is not -1:
+                taging_user_tag[tag_user][taging_number] = seperate_log.split()[5]
+            elif seperate_log.find(">> delete") is not -1:
+                taging_user_tag[tag_user][taging_number] = ""
+            else:
+                taging_user_tag[tag_user][taging_number] = seperate_log.split()[3]
+
+
 
     return render(request, 'brat/DiffrentUser.html', {'taging_list': taging_list, "taging_user_tag": taging_user_tag,
                                                       'tad_list': tad_list})
@@ -409,6 +447,8 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
     taging_data_ann = taging_data.taging_data_ann
     taging_data_rate = TagingDataRate.objects.get(taging_data_id=taging_data_id, taging_number=tag_number)
     ann = taging_data_ann.split("\r\n")
+    ann_count = get_list_len_no_blank(ann)
+    print("ann_count", ann_count)
 
     checked = ""
     blank = True
@@ -421,6 +461,12 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
     if request.method == 'POST':
         user_ = User.objects.get(username=request.user.username)
         user = Profile.objects.get(user_id=user_.id)
+        latest_taging_data=None
+        if LatestTagingData.objects.filter(latest_taging_number=taging_data_id,
+                                           latest_taging_user=request.user.username).exists():
+            latest_taging_data = LatestTagingData.objects.get(latest_taging_number=taging_data_id, latest_taging_user=request.user.username)
+        taging_data_count = len(taging_data.taging_data_detail.split("\n"))
+        print("taging_data_count", taging_data_count)
 
         s = get_time()
 
@@ -429,27 +475,46 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
             for ann_ in ann:
                 temp = ann_.split(" ")
                 if temp[0] == str(tag_number):
-                    ta = taging_data_ann.replace(str(temp[0])+" "+checked, "")
+                    ta = taging_data_ann.replace(str(temp[0])+" "+checked+"\r\n", "")
                     taging_data.taging_data_ann = ta
+                    taging_data.taging_is_full_tag = ((ann_count-1) / taging_data_count)*100
                     taging_data.save()
 
                     taging_data_rate.taging_log += ""+s+" "+request.user.username+" "+checked+" >> delete \n"
                     taging_data_rate.taging_tag = ""
                     taging_data_rate.save()
-                    break
 
+                    if latest_taging_data:
+                        latest_taging_data.latest_taging_time = get_time()
+                        latest_taging_data.save()
+                    else:
+                        LatestTagingData.objects.create(latest_taging_user=request.user.username,
+                                                        latest_taging_title=taging_list_title,
+                                                        latest_taging_text=taging_data.taging_data_title,
+                                                        latest_taging_number=taging_data_id)
+                    break
         elif request.POST['tag'] in TAG:
             for ann_ in ann:
                 temp = ann_.split(" ")
                 if temp[0] == str(tag_number):
-                    ta = taging_data_ann.replace(str(temp[0])+" "+checked, str(temp[0])+" "+request.POST['tag'])
+                    ta = taging_data_ann.replace(str(temp[0])+" "+checked+"\r\n", str(temp[0])+" "+request.POST['tag']+"\r\n")
+                    taging_data.taging_is_full_tag = (ann_count / taging_data_count)*100
                     taging_data.taging_data_ann = ta
                     blank = False
                     taging_data.save()
 
-                    taging_data_rate.taging_log += ""+s + " " + request.user.username +" "+checked +"에서 "+request.POST['tag']+"로 변경 \n"
+                    taging_data_rate.taging_log += ""+s + " " + request.user.username +" "+checked +" 에서 "+request.POST['tag']+" 로 변경 \n"
                     taging_data_rate.taging_tag = request.POST['tag']
                     taging_data_rate.save()
+
+                    if latest_taging_data:
+                        latest_taging_data.latest_taging_time = get_time()
+                        latest_taging_data.save()
+                    else:
+                        LatestTagingData.objects.create(latest_taging_user=request.user.username,
+                                                        latest_taging_title=taging_list_title,
+                                                        latest_taging_text=taging_data.taging_data_title,
+                                                        latest_taging_number=taging_data_id)
 
                     if user.for_document_taging_count != taging_data.id:
                         user.for_document_taging_count = taging_data.id
@@ -468,11 +533,21 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
         if blank == True:
             ta = taging_data_ann + str(tag_number) + " " + request.POST['tag'] + "\r\n"
             taging_data.taging_data_ann = ta
+            taging_data.taging_is_full_tag = ((ann_count + 1) / taging_data_count)*100
             taging_data.save()
 
             taging_data_rate.taging_log += ""+s + " " + request.user.username + " " + request.POST['tag'] + " 추가 \n"
             taging_data_rate.taging_tag = request.POST['tag']
             taging_data_rate.save()
+
+            if latest_taging_data:
+                latest_taging_data.latest_taging_time = get_time()
+                latest_taging_data.save()
+            else:
+                LatestTagingData.objects.create(latest_taging_user=request.user.username,
+                                                latest_taging_title=taging_list_title,
+                                                latest_taging_text=taging_data.taging_data_title,
+                                                latest_taging_number=taging_data_id)
 
             if user.for_document_taging_count != taging_data.id:
                 user.for_document_taging_count = taging_data.id
@@ -612,3 +687,10 @@ def temp(request):
 def all_delete():
     all_delete_data_and_datarate = TagingData.objects.all()
     all_delete_data_and_datarate.delete()
+
+def get_list_len_no_blank(list):
+    temp = []
+    for i in list:
+        if i is not "":
+            temp.append(i)
+    return len(temp)

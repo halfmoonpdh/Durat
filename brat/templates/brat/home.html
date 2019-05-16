@@ -41,3 +41,28 @@
         <p><a href="{% url 'brat:admin' %}">관리자 모드</a></p>
     {% endif %}
 {% endblock %}
+
+{% block article_latest_data_list %}
+    <p>
+        <h6>최근 태깅한 문서</h6>
+        {% if latest_taging_datas %}
+            <ul>
+                {% for latest_taging_data in latest_taging_datas %}
+                    <li><a href="{% url 'brat:detail' taging_list_title=latest_taging_data.latest_taging_title taging_data_id=latest_taging_data.latest_taging_number %}">
+                        {{ latest_taging_data.latest_taging_text }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </p><br>
+    <p>
+        <h6>태깅중이거나 완료된 문서</h6>
+        {% if taging_is_full_datas %}
+            <ul>
+                {% for taging_is_full_data in taging_is_full_datas %}
+                    <li><a href="{% url 'brat:detail' taging_list_title=taging_is_full_data.taging_list_id taging_data_id=taging_is_full_data.id %}">
+                        {{ taging_is_full_data.taging_data_title }}&nbsp;&nbsp;({{ taging_is_full_data.taging_is_full_tag|floatformat:2 }}%)</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </p>
+{% endblock %}
