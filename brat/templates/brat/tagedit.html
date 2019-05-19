@@ -1,4 +1,4 @@
-<form action="" method="post" style="border: solid 1px black; width: 120px; margin: 350px 0px 0px 650px; padding: 10px 10px 10px 10px;">
+<form action="{% url 'brat:tagedit' taging_data_id=taging_data_id taging_list_title=taging_list_title tag_number=tag_number %}" method="post" style="border: solid 1px black; width: 120px; background-color: white;">
 {% csrf_token %}
     {% for i in TAG %}
         {% if i == checked %}
@@ -8,5 +8,5 @@
         {% endif %}
     {% endfor %}
         <p><input type="radio" id="tagdelete" name="tag" value="delete"><label for="tagdelete">태그 삭제</label></p>
-    <input type="submit" href="">
+    <input type="submit" id="iframe_submit">
 </form>

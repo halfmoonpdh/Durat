@@ -40,13 +40,44 @@
                     <span id="is_success"></span>
                 </p>
                 {% for i in tad_list %}
+                    {% with forloop.counter as forloopcounter %}
                     {% if i|length < 2 %}
-                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
-                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span><a href="{{ forloop.counter }}/tagedit/">{{ forloop.counter }}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;</span></p>
+                        <p class="data_text_decorations no_margin_padding" style="position: absolute; z-index: 1"><span id = "data_text_decoration_{{ forloopcounter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;" id="tag_number_{{ forloopcounter }}"><span>{{ forloopcounter }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <form style="border: solid 1px black; width: 120px; background-color: white; display: none;" width="150px" height="370px" id="form_tag_number_{{ forloopcounter }}"
+                            action="{% url 'brat:tagedit' taging_data_id=taging_data_id taging_list_title=taging_list_title tag_number=forloopcounter %}" method="post" >
+                                {% csrf_token %}
+                                    {% for i in TAG %}
+                                        {% if i == forloopcounter %}
+                                            <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}" checked="checked"><label for="{{ i }}">{{ i }}</label></p>
+                                        {% else %}
+                                            <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}"><label for="{{ i }}">{{ i }}</label></p>
+                                        {% endif %}
+                                    {% endfor %}
+                                        <p><input type="radio" id="tagdelete" name="tag" value="delete"><label for="tagdelete">태그 삭제</label></p>
+                                    <input type="submit" id="iframe_submit">
+                                </form>
+                            <span>&nbsp;</span></p>
                     {% else %}
-                        <p class="data_text_decorations no_margin_padding"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
-                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;"><span><a href="{{ forloop.counter }}/tagedit/">{{ forloop.counter }}</a>&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="data_text_{{ forloop.counter }}" >{{ i }}</span></p>
+                        <p class="data_text_decorations no_margin_padding" style="position: absolute; z-index: 1"><span id = "data_text_decoration_{{ forloop.counter }}"></span></p>
+                        <p style="margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;" id="tag_number_{{ forloopcounter }}"><span>{{ forloopcounter }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <form style="border: solid 1px black; width: 120px; background-color: white; display: none;" width="150px" height="370px" id="form_tag_number_{{ forloopcounter }}"
+                                  action="{% url 'brat:tagedit' taging_data_id=taging_data_id taging_list_title=taging_list_title tag_number=forloopcounter %}" method="post" >
+                                {% csrf_token %}
+                                {% for i in TAG %}
+                                    {% if i == forloopcounter %}
+                                        <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}" checked="checked"><label for="{{ i }}">{{ i }}</label></p>
+                                    {% else %}
+                                        <p><input type="radio" id="{{ i }}" name="tag" value="{{ i }}"><label for="{{ i }}">{{ i }}</label></p>
+                                    {% endif %}
+                                {% endfor %}
+                                <p><input type="radio" id="tagdelete" name="tag" value="delete"><label for="tagdelete">태그 삭제</label></p>
+                                <input type="submit" id="iframe_submit">
+                            </form>
+                            <span id="data_text_{{ forloopcounter }}" >{{ i }}</span>
+                        </p>
                     {% endif %}
+                    {% endwith %}
                 {% endfor %}
             </td>
         </tr>
@@ -93,6 +124,7 @@
             <td width="25%"><a href="">-</a></td>
         </thead>
     </table>
+    
     <script>
         {% for num, tag in ann_dic.items %}
             {% if tag == "RE_S" %}
@@ -117,6 +149,15 @@
                 $("#data_text_decoration_{{ num }}").text("{{ tag }}").css("backgroundColor", "#c894d2");
                 $("#data_text_{{ num }}").css("backgroundColor", "#c894d2");
             {% endif %}
+        {% endfor %}
+        {% for i in tad_list %}
+            {% with forloop.counter as forloopcounter %}
+                $("#tag_number_{{ forloopcounter }}").click(function () {
+                    $("#form_tag_number_{{ forloopcounter }}").toggle()
+                    $("#form_tag_number_{{ forloopcounter }}").css("position", "absolute")
+                    $("#form_tag_number_{{ forloopcounter }}").css("z-index", "100")
+                });
+            {% endwith %}
         {% endfor %}
     </script>
 {% endblock %}

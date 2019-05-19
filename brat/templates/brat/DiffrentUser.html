@@ -24,10 +24,10 @@
 
 {% block article_data_list %}
     <div style="margin-bottom: 50px">
-        <p style="color: #ff9400; font-size: 45px">간단 태깅 로그</p>
-        <table>
+        <p class="lobster_font_for_korean" style="color: #ff9400; font-size: 45px">간단 태깅 로그</p>
+        <table class="table">
             <tr>
-                <td>문장</td>
+                <td style="text-align: center;">문장</td>
                 {% for taging_user, taging_user_taging in taging_user_tag.items %}
                     <td class="lobster_font" style="color: black; font-size: 15px">{{ taging_user }}</td>
                 {% endfor %}
@@ -35,7 +35,7 @@
             {% for tad_list_count in tad_list %}
                 {% with loopcounter=forloop.counter %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
+                    <td style="text-align: center;">{{ forloop.counter }}</td>
                     {% for taging_user, taging_user_taging in taging_user_tag.items %}
                         {% for number, tag in taging_user_taging.items %}
                             {% if loopcounter == number %}

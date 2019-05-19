@@ -223,7 +223,7 @@ def detail(request, taging_list_title, taging_data_id, is_success=False):
             ann_dic[i[0]] = i[1]
 
     return render(request, 'brat/detail.html', {'taging_list_title': taging_list_title, 'taging_data_id': taging_data_id,
-                                                'taging_list': taging_list, 'taging_data': taging_data,
+                                                'taging_list': taging_list, 'taging_data': taging_data, "TAG": TAG,
                                                 'tad_list': tad_list, 'ann_dic': ann_dic, 'is_success': is_success})
 
 @login_required
@@ -307,10 +307,10 @@ def autoannotation(request, taging_list_title, taging_data_id):
             taging_data.taging_data_ann = ann_temp
             taging_data.save()
         else:
-            result = result + str(j) + " " + temp + "\r\n"
+            result = result + str(j) + " " + temp + "\n"
 
         taging_data_rate.taging_tag = temp
-        taging_data_rate.taging_log += s + " " + "auto" + " " + temp + "추가 \n"
+        taging_data_rate.taging_log += s + " " + "auto" + " " + temp + " 추가 \n"
         taging_data_rate.save()
         j = j+1
 
@@ -351,10 +351,10 @@ def different_user(request, taging_list_title, taging_data_id):
 
             if seperate_log.find("변경") is not -1:
                 taging_user_tag[tag_user][taging_number] = seperate_log.split()[5]
-            elif seperate_log.find(">> delete") is not -1:
-                taging_user_tag[tag_user][taging_number] = ""
-            else:
+            elif seperate_log.find("추가") is not -1:
                 taging_user_tag[tag_user][taging_number] = seperate_log.split()[3]
+            else:
+                taging_user_tag[tag_user][taging_number] = ""
 
 
 
@@ -448,7 +448,6 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
     taging_data_rate = TagingDataRate.objects.get(taging_data_id=taging_data_id, taging_number=tag_number)
     ann = taging_data_ann.split("\r\n")
     ann_count = get_list_len_no_blank(ann)
-    print("ann_count", ann_count)
 
     checked = ""
     blank = True
@@ -466,7 +465,6 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
                                            latest_taging_user=request.user.username).exists():
             latest_taging_data = LatestTagingData.objects.get(latest_taging_number=taging_data_id, latest_taging_user=request.user.username)
         taging_data_count = len(taging_data.taging_data_detail.split("\n"))
-        print("taging_data_count", taging_data_count)
 
         s = get_time()
 
@@ -562,7 +560,8 @@ def tagedit(request, taging_list_title, taging_data_id, tag_number):
 
         return HttpResponseRedirect("/home/{}/{}".format(taging_list_title, taging_data_id))
 
-    return render(request, 'brat/tagedit.html', {'TAG': TAG, 'checked': checked})
+    return render(request, 'brat/tagedit.html', {'TAG': TAG, 'checked': checked, 'taging_data_id': taging_data_id,
+                                                 'taging_list_title': taging_list_title, 'tag_number': tag_number})
 
 
 
